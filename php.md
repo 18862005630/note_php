@@ -129,3 +129,72 @@ $str = implode($sep,$arr)		-----按$sep字符将数组arr拼成字符串
 
 
 ```
+
+#### 5、Cookie and Session
+```
+#### a.Cookie
+cookie 是一种在远程浏览器上存储数据并以此来跟踪和识别用户的一种机制。
+实际就是web服务器暂时存储在用户硬盘上的一个文本文件，并随后被web浏览器读取。
+如：登录第一次后无需再次登录的站点
+文本文件命令格式：用户名@网站地址【数字】.txt		-----远程用户当前系统登录用户名（如adminstrator）
+
+##### 设置cookie
+boolean setcookie(name,value,expire,path,domain,secure)
+name:cookie变量名 string
+value:cookie的值 string
+expire：cookie的过期时间 单位：秒 不设置则在关闭浏览器之前都有效；设置了就算重启电脑，只有没到过期时间仍然有效。
+path：cookie在服务端的有效路径 默认是当前目录；“/”表示整个domain内有效；“/mnt”表示domain下mnt文件夹及其子文件夹都有效
+domain：cookie有效的域名 
+secure：cookie是否通过安全的https 默认0：http、https都有效 1：cookie仅在https连接有效
+
+##### 读取cookie
+$_COOKIE[name]
+
+##### 删除cookie
+setcookie(name,"",time()-1)
+setcookie(name,"",0)
+
+##### cookie的生命周期
+如果cookie不设置过期时间，则在关闭浏览器之前都有效，这种cookie被称为会话cookie，且不存储在硬盘而是内存中；
+如果cookie设置了过期时间，则cookie的文本文件存储在硬盘，即使重启电脑只要没有达到过期时间就依然有效。
+注意:
+浏览器最多允许300个cookie文件，且每个cookie文件最大4KB，每个域名最多支持20个cookie文件，所以如果超出限制，浏览器会随机删除cookie文件。
+
+
+#### b.Session
+Session是指终端用户与交互系统进行通信的时间间隔，指从注册进入系统到注销退出系统所经过的时间，实际上是一个特定的时间概念。
+##### 启动会话
+session_start()
+位于一个页面的开始位置，在这之前页面不能有任何输出，否则报错
+
+##### 注册会话
+session_start();		----启动会话
+$_SESSION["admin"] = null;		----声明
+
+##### 使用会话
+if(!empty($_SESSION['admin'])){
+	$ss = $_SESSION['admin'];
+}
+
+
+##### 删除会话
+1) 删除单个会话
+unset($_SESSION['admin'])
+不能使用unset($_SESSION),这会导致所有会话不能使用，且不能重新注册
+
+2）删除多个会话
+$_SESSION = array();
+
+3) 删除当前会话
+session_destroy();
+
+##### 设置session过期时间
+session_start();
+$expire = 60;		----1分钟失效
+setcookie(session_name(),session_id(),time()+$expire,"/");		-----失效时间和cookie的失效时间一致，“/”可选参数，放置cookie的路径
+$_SESSION['user'] = 'zyx';
+
+##### session的原理
+请求该页面之后会产生一个session_id，如果浏览器禁止了cookie就无法传递session_id,在请求下一个页面的时候又会重新产生一个session_id,这样就造成了session在页面间传递失效。
+
+```
