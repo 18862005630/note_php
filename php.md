@@ -98,4 +98,34 @@ a.按字节进行字符串比较（多用于用户登录比较用户名和密码
 strcmp($str1,$str2)		-----需要区分大小写，相等输出0，str1大于str2输出正数，小于时输出负数
 strcasecmp($str1,$str2)		-----不区分大小写
 
+#### 五、检索字符串
+strstr($str1,$str2)		-----从str1中查找str2是否出现，存在则从str2部分输出剩余子字符串，没有则输出false；此函数区分大小写;适用于上传图片验证图片格式后缀
+substr_count($str1,$str2)		-----str2在str1中出现的次数
+
+
+#### 六、字符串替换
+a.str_ireplace($search,$replace,$str,count)
+$search:str中需要被替换的字符串
+$replace:替换的值
+$str:原字符串
+count：替换的次数，可选，非必须（测试无用，尽量不用）
+此函数不区分$search字符串的大小写，区分大小写的函数为str_replace
+
+b.substr_replace($str,$replace,$start,$len)
+$str:原字符串
+$replace:替换的值
+$start:源字符串中开始替换的位置，不包含当前位置
+$len:需替换的字符串长度，中文一个字两个字节长度
+
+
+#### 七、格式化字符串
+string number_format($num,[小数位数],[替换小数点的符号],[替换千位逗号的符号])
+如果只有$num，则四舍五入取整，默认小数点为’.‘,千位用逗号分隔
+
+
+#### 八、字符串的合成与分割
+$arr = explode($sep,$str)		-----按$sep字符从字符串str中分割成数组
+$str = implode($sep,$arr)		-----按$sep字符将数组arr拼成字符串
+
+
 ```
