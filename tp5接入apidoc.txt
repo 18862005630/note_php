@@ -1,0 +1,41 @@
+若项目路径：tp5
+1、安装nodejs
+2、安装apidoc
+3、创建apidoc.json文件，路径为：tp5/application/apidoc.json,保证与项目源码(前端源码:tp5/application/index,后端源码:tp5/application/admin)同级
+示例：
+apidoc.json:
+
+{
+  "name": "example",
+  "version": "1.0.0",
+  "description": "apiDoc basic example",
+  "title": "Custom apiDoc browser title",
+  "url" : "http://www.demo.com"
+}
+
+4:控制器方法写注释
+示例(Index控制器下的demo方法):
+tp5/application/index/controller/Index:
+
+/**
+    @api  {get} /index/Index/demo/:id 测试函数
+    @apiVersion 1.0.0
+    @apiName 测试函数
+    @apiGroup web.zyx
+    @apiPermission zyx
+    @apiDescription 描述
+    @apiParam {int} id 测试ID
+    @apiSuccessExample {json} Success-Response:
+     * HTTP/1.1 200 OK
+     *     {
+     *       "firstname": "John",
+     *       "lastname": "Doe"
+     *     }
+     */
+5、生成接口文档：
+在tp5根目录下执行(注意是tp5不是tp5/public,将接口文档生成在外网唯一入口文件public下)：
+apidoc -i application/ -o public/apidoc/
+
+则public/apidoc/下index.html文件就是接口文档，可通过域名访问：域名+/apidoc/index.html
+
+具体注释细节访问：https://apidocjs.com/，其他编程语言同理
