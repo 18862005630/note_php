@@ -90,3 +90,16 @@ Array
        )
 )
 ```
+
+#### 4、array_count_values($arr);
+```
+解释：
+函数作用：计数原数组中的元素个数，并以键值对形式的数组返回。键为元素，值为该元素在原数组中出现的次数。
+例子：
+$a=array("A","Cat","Dog","A","Dog");
+print_r(array_count_values($a));
+
+结果输出：
+Array ( [A] => 2 [Cat] => 1 [Dog] => 2 )
+```
+
