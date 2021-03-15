@@ -103,3 +103,23 @@ print_r(array_count_values($a));
 Array ( [A] => 2 [Cat] => 1 [Dog] => 2 )
 ```
 
+#### 5、array_diff_assoc($arr1,$arr2...);
+```
+解释：
+函数作用：返回一个数组，该数组元素属于$arr1中的键值对，但没有在后续数组中出现过的键值对元素。
+
+例子：
+$a1=array("a"=>"red","b"=>"green","c"=>"blue","d"=>"yellow");
+$a2=array("a"=>"red","f"=>"green","g"=>"blue");
+$a3=array("h"=>"red","b"=>"green","g"=>"blue");
+
+$result=array_diff_assoc($a1,$a2,$a3);
+print_r($result);
+
+输出结果为：
+Array
+(
+   [c] => blue
+   [d] => yellow
+)
+```
